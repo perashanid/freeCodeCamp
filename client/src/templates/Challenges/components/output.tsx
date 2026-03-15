@@ -1,6 +1,5 @@
 import { isEmpty } from 'lodash-es';
 import React from 'react';
-import sanitizeHtml from 'sanitize-html';
 import i18next from 'i18next';
 
 import './output.css';
@@ -11,15 +10,7 @@ interface OutputProps {
 }
 
 function Output({ defaultOutput, output }: OutputProps): JSX.Element {
-  const rawMessage = !isEmpty(output) ? output : defaultOutput;
-
-  // Sanitize HTML but preserve entities by disabling entity decoding
-  const message = sanitizeHtml(rawMessage, {
-    allowedTags: ['b', 'i', 'em', 'strong', 'code', 'wbr'],
-    parser: {
-      decodeEntities: false
-    }
-  });
+  const message = !isEmpty(output) ? output : defaultOutput;
 
   return (
     <pre
